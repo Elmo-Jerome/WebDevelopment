@@ -1,5 +1,22 @@
 .header {
-    height: 6.5rem;
+    height: 3rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background: pink;
+    position: fixed-top;
+    background-color: #333333;
+}
+.header-wrap {
+    height: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.6fr 9fr;
+}
+.logo {
+    background-image: url('../../assets/oshoppee-2.png');
+    background-size: 35%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.nav-items-grid {
+    background: aquamarine;
 }
