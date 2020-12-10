@@ -6,7 +6,7 @@ const MainLayout = props => {
 
     return (
         <Fragment>
-            <Header />
+            <Header currentUser={props.currentUser} />
             <div className="content">
                 { props.children }
             </div>

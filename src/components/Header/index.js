@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
 import './style.scss'
 
 
 
 const Header = props => {
+    const [ user, setUser ] = useState(null);
+
+    useEffect(()=>{
+        props.currentUser ? setUser(props.currentUser) : setUser(null)
+    }, [props.currentUser])
 
     return (
         <header className="header">
@@ -15,12 +21,23 @@ const Header = props => {
                 </Link>    
             </div>        
             <div className="nav-items-grid">
-                <div className="nav-item">
-                    <Link to="/registration">REGISTER</Link>
-                </div>
-                <div className="nav-item">
-                    <Link to="/login">LOGIN</Link>
-                </div>
+               {!user && 
+               <Fragment>
+                    <div className="nav-item">
+                        <Link to="/registration">REGISTER</Link>
+                    </div>
+                    <div className="nav-item">
+                        <Link to="/login">LOGIN</Link>
+                    </div>
+                </Fragment>
+                }
+                {user && 
+                <Fragment>
+                    <div className="nav-item">
+                        <a onClick={() => auth.signOut()}>LOGOUT</a>
+                    </div>
+                </Fragment>
+                }
             </div>
            </div>
         </header>

@@ -15,7 +15,7 @@ class Login extends Component {
                 <div className="signin-text">
                     LOGIN
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="signin-form">
                     <Button action={signInWithGoogle} name="Sign in with Google" width="100" />
                 </form>  
             </div>
