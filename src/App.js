@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './default.scss'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { auth } from './firebase/utils'
+import { auth, handleProfile } from './firebase/utils'
 ///// Layouts /////
 import MainLayout from './layouts/MainLayout'
 ///// Pages /////
@@ -20,18 +20,29 @@ class App extends Component {
   authListener = null
 
   componentDidMount () {
-    this.authListener = auth.onAuthStateChanged(userAuth => {
+    this.authListener = auth.onAuthStateChanged( async userAuth => {
       if (!userAuth) {
-        this.setState({
-          currentUser: null
-        })
+       this.setState({
+         currentUser: null
+       })
       } else {
-        this.setState({
-          currentUser: userAuth
-        })
+        // Fetch User Ref 
+        const userRef = await handleProfile(userAuth)
+        // Set State on Fetch 
+        userRef.onSnapshot(snapshot => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data()
+            }
+          })
+        })    
+      
       }
+    
     })
   }
+
 
   componentWillUnmount () {
     this.authListener()
