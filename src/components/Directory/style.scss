@@ -1,25 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap');
+
 .homepage-wrapper {
-    width: 100%;
-    height: 95.2vh;
+    font-family: 'Playfair Display', serif;
+    font-size: 0;
+    color: white;
+    text-align: center;
+    width: 60%;
+    height: 93.6vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin: 4rem auto 0;
 }
 .men-fashion-directory {
     background: url('../../assets/men-fashion.png');
     background-repeat: no-repeat;
     background-size: cover;
-    
 }
-.men-fashion-directory:hover {
-   
-}
-
 .women-fashion-directory {
     background: url('../../assets/women-fashion.png');
     background-repeat: no-repeat;
-    background-size: cover;
-    
+    background-size: cover; 
 }
-.women-fashion-directory:hover {
-   
+
+.men-fashion-directory:hover, .women-fashion-directory:hover {
+   filter: grayscale(100%);
+   font-size: 6rem;
 }
+
+.fashion-text {
+    z-index: 2;
+    margin-top: 20rem;
+}
+
+

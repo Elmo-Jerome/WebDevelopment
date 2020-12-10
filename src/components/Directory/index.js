@@ -3,14 +3,21 @@ import './style.scss'
 
 const Directory = props => {
 
-    const clickHandler = event => {
-        console.log("clicked")
+    const MensFashionPage = event => {
+        console.log("men's fashion")
+    }
+    const WomensFashion = event => {
+        console.log("women's fashion")
     }
 
     return (
         <div className="homepage-wrapper">
-            <div className="men-fashion-directory" onClick={clickHandler}/>
-            <div className="women-fashion-directory"/>
+            <div className="men-fashion-directory" onClick={MensFashionPage}>
+                <p className="fashion-text">Men's</p>                
+            </div>
+            <div className="women-fashion-directory" onClick={WomensFashion}>
+                <p className="fashion-text">Women's</p>    
+            </div>
         </div>
     )
 }
