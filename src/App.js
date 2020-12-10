@@ -6,6 +6,7 @@ import MainLayout from './layouts/MainLayout'
 ///// Pages /////
 import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
+import LoginPage from './pages/Login'
 
 import Men from './pages/Men'
 import Women from './pages/Women'
@@ -32,6 +33,11 @@ function App() {
         <Route exact path="/women" render={() => (
           <MainLayout>
             <Women />
+          </MainLayout>
+        )} />
+        <Route exact path="/login" render={() => (
+          <MainLayout>
+            <LoginPage />
           </MainLayout>
         )} />
       </Switch>

@@ -16,14 +16,14 @@ const Directory = props => {
             <div className="men-wrapper"> 
                 <Link to="/men"> 
                     <div className="men-fashion-directory" onClick={MensFashionPage}>
-                        <p className="fashion-text">Men's</p>                
+                       <span className="fashion-text"> Men's </span>
                     </div>
                 </Link>  
             </div>
             <div className="women-wrapper">
                 <Link to="/women">
                     <div className="women-fashion-directory" onClick={WomensFashion}>
-                        <p className="fashion-text">Women's</p>    
+                        <span className="fashion-text"> Women's </span>
                     </div>
                 </Link>
             </div>

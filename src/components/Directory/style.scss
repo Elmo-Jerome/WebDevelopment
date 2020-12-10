@@ -15,6 +15,7 @@
 .women-wrapper {
     grid-column: 2 / 4;
 }
+
 .men-fashion-directory {
     font-size: 0;
     height: 100%;
@@ -33,16 +34,22 @@
     background-size: cover; 
     background-position-x: center;
 }
-
-.men-fashion-directory:hover, .women-fashion-directory:hover {
-   filter: grayscale(100%);
-   font-size: 6rem;
+.men-wrapper:hover, .women-wrapper:hover {
+    filter: grayscale(100%);
+    -webkit-transition:  all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
-
-.fashion-text {
+.men-fashion-directory:hover, .women-fashion-directory:hover {
+    font-size: 6rem;
     color: white;
+}
+.fashion-text {
     position: relative;
     top: 20rem;
 }
+
+
+
 
 
