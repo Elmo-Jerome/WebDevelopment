@@ -10,38 +10,35 @@ firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
-// Google Auth API
+// Google Auth API 
 const GoogleAPI = new firebase.auth.GoogleAuthProvider()
 GoogleAPI.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleAPI)
 
-// Store User Credentials
-export const handleProfile = async( userAuth, additionalData ) => {
-    if(!userAuth) {
-        return 
-    } else {
-        // Use UID to query user data from DB
+// Store User Credentials 
+export const handleProfile = async (userAuth, additionalData ) => {
+    if (!userAuth) { return } 
+    else {
+        // Get UID from userAuth (Provided by Google Sign IN) use it to query DB
         const { uid } = userAuth
         const userRef = firestore.doc(`users/${uid}`)
-        // Check if user exists on DB 
+        // check if User exist
         const user = await userRef.get()
-
-        if (!user.exists) {
-            // if user Doesn't exists Create a new instance from gmail given
+        if(!user.exists) {
+            // if user doesn't exist Use userAuth data to create anew one
             const { displayName, email } = userAuth
-            const timestamp = new Date()
+            const timestamp = new Date() 
 
             try {
-                // Instance Creation
+                // User Creation 
                 userRef.set({
                     displayName,
                     email,
                     createdAt: timestamp,
                     ...additionalData
-                }) 
-            } catch(err) {
-                console.log(err)
-            }
-        } return userRef 
+                })
+            } catch (err) { console.log(err) }
+
+        } return userRef
     }
 }

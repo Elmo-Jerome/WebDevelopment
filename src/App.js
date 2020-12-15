@@ -29,11 +29,11 @@ class App extends Component {
         // Fetch User Ref 
         const userRef = await handleProfile(userAuth)
         // Set State on Fetch 
-        userRef.onSnapshot(snapshot => {
+        userRef.onSnapshot(user => {
           this.setState({
             currentUser: {
-              id: snapshot.id,
-              ...snapshot.data()
+              id: user.id,
+              ...user.data()
             }
           })
         })    
@@ -59,7 +59,7 @@ class App extends Component {
                 <Homepage />
               </MainLayout>)}
             />
-            <Route exact path="/registration" render={() => (
+            <Route exact path="/registration" render={() => currentUser ? <Redirect to="/" /> : (
               <MainLayout currentUser={currentUser}>
                 <RegistrationPage />
               </MainLayout>)}

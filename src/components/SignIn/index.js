@@ -16,7 +16,14 @@ class Login extends Component {
                     LOGIN
                 </div>
                 <form onSubmit={this.handleSubmit} className="signin-form">
-                    <Button action={signInWithGoogle} name="Sign in with Google" width="100" />
+                    <Button  
+                        color="#D34836"
+                        hoverColor="#e54634"
+                        name="Google +" 
+                        action={signInWithGoogle}
+                        width="100" 
+                        enabled={true}
+                    />
                 </form>  
             </div>
             )

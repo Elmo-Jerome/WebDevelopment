@@ -4,27 +4,26 @@ import './style.scss'
 const Button = props => {
     const [ hovered, setHovered ] = useState(false)
     const [ background, setBackground ] = useState("")
-    const defaultUnhovered = "#313131"
-    const defaultHovered = "#6b6b6b"
+    const defaultUnhovered = "#141414"
+    const defaultHovered = "#3f3f3f"
+    const defaultDisabled = "#bfbfbf"
 
     useEffect(() => {
-        console.log(hovered)
-        // Pag may color na binigay sa Button need din may hoverColor
-        if (props.color && props.hoverColor) {
+        // Pag may color na binigay sa Button need din may hoverColor din
+        if (props.color && props.hoverColor && props.enabled) {
             if ( hovered && background !== props.hoverColor ) {
                 setBackground(props.hoverColor)
             } else if ( hovered === false && background !== props.color ) {
                 setBackground(props.color)
             }
         } else {
-            if (hovered && background !== defaultHovered) {
+            if (hovered && background !== defaultHovered && props.enabled) {
                 setBackground(defaultHovered)
-                console.log("hovered background")
             } else {
                 setBackground(defaultUnhovered)
             }
         }
-    }, [hovered])
+    }, [hovered, props.enabled])
 
     return (
         <div
@@ -34,8 +33,9 @@ const Button = props => {
             onMouseOut={()=>{setHovered(false)}}
             style={{ 
                 width: props.width ? `${props.width}%` : "auto",
-                background: background,
-                color: props.textColor ? props.textColor: "white"
+                background: props.enabled ? background : defaultDisabled,
+                color: props.textColor ? props.textColor: "white",
+                pointerEvents: props.enabled ? `all`: `none`,
             }}>
                 { props.name }
            
