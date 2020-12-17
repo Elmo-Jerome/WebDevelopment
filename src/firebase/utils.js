@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { firebaseConfig } from './config'
@@ -12,33 +12,37 @@ export const firestore = firebase.firestore()
 
 // Google Auth API 
 const GoogleAPI = new firebase.auth.GoogleAuthProvider()
-GoogleAPI.setCustomParameters({ prompt: 'select_account' })
+GoogleAPI.setCustomParameters({ prompt: 'select_account'})
 export const signInWithGoogle = () => auth.signInWithPopup(GoogleAPI)
 
-// Store User Credentials 
-export const handleProfile = async (userAuth, additionalData ) => {
-    if (!userAuth) { return } 
+
+// Store Credentials / Create New Users
+export const handleProfile = async (userAuth, additionalData) => {
+    if (!userAuth) { return }
     else {
-        // Get UID from userAuth (Provided by Google Sign IN) use it to query DB
+        // Take UID from userAuth( from Google Sign-in) to query DB
         const { uid } = userAuth
         const userRef = firestore.doc(`users/${uid}`)
-        // check if User exist
+        // check if User exists
         const user = await userRef.get()
-        if(!user.exists) {
-            // if user doesn't exist Use userAuth data to create anew one
+
+        if (!user.exists) {
+            // If user doesn't exists create new one using data from userAuth(Google Sign in)
             const { displayName, email } = userAuth
-            const timestamp = new Date() 
+            const timestamp = new Date()
 
             try {
-                // User Creation 
+                // user Creation 
                 userRef.set({
                     displayName,
                     email,
                     createdAt: timestamp,
                     ...additionalData
                 })
-            } catch (err) { console.log(err) }
-
+            } catch (err) {
+                console.log(err)
+            }
         } return userRef
     }
 }
+

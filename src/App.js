@@ -8,6 +8,7 @@ import MainLayout from './layouts/MainLayout'
 import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
 import LoginPage from './pages/Login'
+import ForgotPass from './pages/ForgotPassword'
 
 import Men from './pages/Men'
 import Women from './pages/Women'
@@ -59,10 +60,11 @@ class App extends Component {
                 <Homepage />
               </MainLayout>)}
             />
-            <Route exact path="/registration" render={() => currentUser ? <Redirect to="/" /> : (
-              <MainLayout currentUser={currentUser}>
-                <RegistrationPage />
-              </MainLayout>)}
+            <Route exact path="/registration" 
+              render={() => currentUser ? <Redirect to="/" /> : (
+                <MainLayout currentUser={currentUser}>
+                  <RegistrationPage />
+                </MainLayout>)}
             />
             <Route exact path="/men" render={() => (
               <MainLayout currentUser={currentUser}>
@@ -75,9 +77,14 @@ class App extends Component {
               </MainLayout>
             )} />
             <Route exact path="/login" 
-            render={() => currentUser ? <Redirect to="/" /> : (
+              render={() => currentUser ? <Redirect to="/" /> : (
+                <MainLayout currentUser={currentUser}>
+                  <LoginPage />
+                </MainLayout>
+            )} />
+            <Route exact path="/forgotpassword" render={()=> (
               <MainLayout currentUser={currentUser}>
-                <LoginPage />
+                <ForgotPass />
               </MainLayout>
             )} />
           </Switch>
