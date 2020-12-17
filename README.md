@@ -1,4 +1,4 @@
-# Getting Started 
+# Getting Started / Setting Things Up
 
 Before anything else, pls install Node JS 
 
