@@ -1,20 +1,24 @@
-.signin {
+$border-color: rgb(151, 151, 151);
+$text-color: rgb(49, 49, 49);
+$link-color: rgb(0, 47, 255);
+
+.login-form {
     width: 30%;
     height: auto;
-    margin: 6rem auto;
-    border: 0.5px solid #747474;
-    border-radius: 10px;
-    padding: 2rem 2rem;
-}
-.signin-text {
-    width: 100%;
-    font-weight: bold;
-    font-size: 1.5rem;
-    text-align: center;
-}
-.signin-form {
-    margin-top: 2rem;
-}
-.forgot-password {
-    cursor: pointer;
+    margin: 6rem auto 2rem;
+    padding: 1rem 2rem;
+    border: 0.5px solid $border-color;
+    border-radius: 5px;
+
+    h1 {
+        text-align: center;
+        color: $text-color;
+        font-size: 3rem; 
+    }
+    a {
+        padding-top: 0.5rem;
+        font-size: 1.3rem;
+        color: $link-color;
+        cursor: pointer;
+    }
 }
