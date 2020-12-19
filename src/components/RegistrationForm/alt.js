@@ -1,34 +1,36 @@
 import React, { Fragment } from 'react'
 import { Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import { auth, handleProfile } from '../../firebase/utils'
 import { Formik, Form, useField } from 'formik'
 import * as Yup from 'yup'
-import { auth, handleProfile } from '../../firebase/utils'
 import './alt.scss'
 
+// Custom Fields & css on js
+
 const useStyle = makeStyles({
-    textField: {
-         marginBottom: "1rem"
+    margins: {
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
     },
     btn: {
-        marginTop: "1rem", 
-        fontSize: "1.3rem"
-    },
+        fontSize: '1.3rem',
+    }
 })
 
 const CustomTextField = ({label, ...props}) => {
-    const classes = useStyle()
     const [ field, meta ] = useField(props)
+    const classes = useStyle()
     return (
         <Fragment>
             <TextField 
-                className={classes.textField}
+                className={classes.margins}
                 label={label}
                 {...field}
                 {...props}
-                error={meta.touched && meta.error}
+                // Error Checking 
+                error={ meta.touched && meta.error}
                 helperText={meta.touched ? meta.error : ""}
-
                 // Customization
                 inputProps={{ style: { fontSize: "1.6rem", }}}
                 InputLabelProps={{ style: { fontSize: "1.6rem" }}}
@@ -44,82 +46,91 @@ const CustomButton = props => {
     return (
         <Fragment>
             <Button
-                className={classes.btn}
+                className={`${classes.margins} ${classes.btn}`}
                 variant="contained"
                 type={props.type}
                 color={props.color}
                 fullWidth
+                onClick={props.OnClick}
             >
-                { props.name }
+                { props.name}
             </Button>
         </Fragment>
     )
 }
 
-
+// Exported Form
 const RegistrationForm = props => {
-    const handleSubmit = async (values) => {
-        const { displayName, password, email } = values
-       try{ 
-           const { user } = await auth.createUserWithEmailAndPassword(email, password)
-           await handleProfile(user, { displayName })
+
+    const handleChange = async (values) => {
+        console.log(values)
+        const { displayName, email, password } = values
+        try {
+            const { user } = await auth.createUserWithEmailAndPassword( email, password )
+            handleProfile(user, {displayName})
+
+        } catch (err) {
+            console.log(err)
         }
-       catch (err) { console.log(err) }
     }
-    return(
+
+    return (
         <Fragment>
             <Formik
                 initialValues={{
                     displayName: '',
                     email: '',
                     password: '',
-                    confirmPassword: '',
+                    confirmPasword: '',
                 }}
                 validationSchema={Yup.object({
                     displayName: Yup.string()
-                        .min(8, "Minimum of 8 characters")
-                        .max(20, "Maximum of 20 characters")
+                        .min(8, 'Minimum of 8 characters')
+                        .max(20, 'Maximum of 20 characters')
                         .required('Required'),
                     email: Yup.string()
-                        .email("Invalid email")
+                        .email('Invalid email')
                         .required('Required'),
                     password: Yup.string()
-                        .min(8, "Minimum of 8 characers")
-                        .max(60, "Maximum of 60 characters")
+                        .min(6, 'Minimum of 6 characters')
+                        .max(60, 'Maximum of 60 characters')
                         .required('Required'),
                     confirmPassword: Yup.string()
-                        .oneOf([Yup.ref("password"), null], "Passwords don't match")
+                        .oneOf([Yup.ref('password')], "Passwords don't match")
                         .required('Required'),
                 })}
-                onSubmit={async (values, {resetForm})=>{
-                    await handleSubmit(values)
+                onSubmit={async(values, { resetForm })=>{
+                    await handleChange(values)
                     resetForm()
                 }}
             >
+
                 {
                     props => (
                         <Form className="registration-form">
+                            <h1>Create an Account</h1>
+                            {/* Custom TextFields */}
                             <CustomTextField 
-                                type="text"
                                 name="displayName"
                                 label="Username"
+                                type="text"
                             />
                             <CustomTextField 
-                                type="email"
                                 name="email"
                                 label="Email"
+                                type="email"
                             />
                             <CustomTextField 
-                                type="password"
                                 name="password"
                                 label="Password"
+                                type="password"
                             />
                             <CustomTextField 
-                                type="password"
                                 name="confirmPassword"
                                 label="Confirm Password"
+                                type="password"
                             />
-                            <CustomButton
+                            <CustomButton 
                                 name="Sign up"
                                 type="submit"
                                 color="primary"

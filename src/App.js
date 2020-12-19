@@ -9,38 +9,33 @@ import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
 import LoginPage from './pages/Login'
 import ForgotPass from './pages/ForgotPassword'
-
 import Men from './pages/Men'
 import Women from './pages/Women'
 
+///// Redux /////
+import { connect } from 'react-redux'
+import { setCurrentUser } from './redux/Actions'
 
 class App extends Component {
- state = {
-   currentUser: null
- }
   authListener = null
 
   componentDidMount () {
+   const { setCurrentUser } = this.props
     this.authListener = auth.onAuthStateChanged( async userAuth => {
-      if (!userAuth) {
-       this.setState({
-         currentUser: null
-       })
-      } else {
-        // Fetch User Ref 
-        const userRef = await handleProfile(userAuth)
-        // Set State on Fetch 
-        userRef.onSnapshot(user => {
-          this.setState({
-            currentUser: {
-              id: user.id,
-              ...user.data()
-            }
+      if (userAuth) {
+         // Fetch User Ref 
+         const userRef = await handleProfile(userAuth)
+         // Set State on Fetch 
+         userRef.onSnapshot(user => {
+          setCurrentUser ( {  
+            id: user.id,
+            ...user.data() 
           })
-        })    
-      
+         })     
+      } else {
+      setCurrentUser(userAuth)
       }
-    
+      
     })
   }
 
@@ -50,40 +45,40 @@ class App extends Component {
   }
   
   render () { 
-    const { currentUser } = this.state
+    const { currentUser } = this.props
 
     return (
         <div className="App">
           <Switch>
             <Route exact path="/" render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Homepage />
               </MainLayout>)}
             />
             <Route exact path="/registration" 
               render={() => currentUser ? <Redirect to="/" /> : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <RegistrationPage />
                 </MainLayout>)}
             />
             <Route exact path="/men" render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Men />
               </MainLayout>
             )} />
             <Route exact path="/women" render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Women />
               </MainLayout>
             )} />
             <Route exact path="/login" 
               render={() => currentUser ? <Redirect to="/" /> : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <LoginPage />
                 </MainLayout>
             )} />
             <Route exact path="/forgotpassword" render={()=> (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <ForgotPass />
               </MainLayout>
             )} />
@@ -93,4 +88,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
+export default connect(mapStateToProps, { setCurrentUser }) (App);

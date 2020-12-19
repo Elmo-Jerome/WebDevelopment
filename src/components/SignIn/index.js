@@ -72,7 +72,7 @@ const LoginForm = props => {
                         .email('Invalid Email')
                         .required('Required'),
                     password: Yup.string()
-                        .min(8, 'Minimum of 8 characters')
+                        .min(6, 'Minimum of 6 characters')
                         .max(20,'Maximum of 20 chracters')
                         .required('Required'),
                 })}

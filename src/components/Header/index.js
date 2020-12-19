@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import './style.scss'
 
 
@@ -8,7 +9,7 @@ import './style.scss'
 const Header = props => {
     const [ user, setUser ] = useState(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         props.currentUser ? setUser(props.currentUser) : setUser(null)
     }, [props.currentUser])
 
@@ -45,4 +46,8 @@ const Header = props => {
 
 }
 
-export default Header
+const mapStateToProps = ({ user }) => ({
+    currentUser: user.currentUser
+})
+
+export default connect(mapStateToProps, null)(Header)
