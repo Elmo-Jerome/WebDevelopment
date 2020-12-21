@@ -1,96 +1,105 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
-import { TextField, Button, makeStyles } from '@material-ui/core'
+import { Formik, Form, useField } from 'formik'
+import * as Yup from 'yup'
+import { TextField, Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
 import { auth } from '../../firebase/utils'
 import './style.scss'
 
+
 const useStyle = makeStyles({
-    margin: {
+    btn: {
+        fontSize: '1.3rem',
         marginTop: "1rem",
     },
+    textField: {
+        marginTop: '1rem',
+    }
 })
 
-const ForgotPassForm = props => {
-    const [ email, setEmail ] = useState(null)
-    const [ validEmail, setValidEmail ] = useState(false)
-    const [ submitted, setSubmitted ] = useState(false)
-
+const CustomButton = props => {
     const classes = useStyle()
-    const history = useHistory()
-
-    
-
-    const emailValidation = () => {
-        const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-        if(emailRegex.test(email) && !validEmail) {
-            setValidEmail(true)
-        } else if (!emailRegex.test(email) && validEmail) {
-            setValidEmail(false)
-        }
-    }
-
-    const changeHandler = e => {
-        setEmail(e.target.value)
-    }
-
-    const handleSubmit = async(e) => {
-        e.preventDefault()       
-       try {
-            await auth.sendPasswordResetEmail(email)
-            .then(() => console.log("send email"))
-            .catch (() => console.log("something went wrong"))
-            .then(()=>history.goBack())
-       } catch (err) {
-           console.log(err)
-       }
-    }
-
-    useEffect(()=>{
-        emailValidation()
-    },[submitted,email])
 
     return (
         <Fragment>
-            <div className="form-box">
-                <div className="forgot-password-text">Forgot Password</div> 
-                <form onSubmit={handleSubmit}>
-                <TextField 
-                        className={classes.margin}
-                        label="Email"
-                        id="email"
-                        type="email"
-                        fullWidth
-                        value={email}
-                        
-
-                        // Customizations
-                        inputProps={{ style: { fontSize: "1.6rem" }}}
-                        InputLabelProps={{ style: { fontSize: "1.6rem" }}}
-                        FormHelperTextProps ={{ style: { fontSize: "1.1rem" } }}
-                        onChange={changeHandler}
-                        
-                        // Error Handling
-                        error={!validEmail && submitted}   
-                        helperText={!validEmail && submitted ? "*Invalid Email*" : ""}                                             
-                    />
-                    <Button 
-                        variant="contained"
-                        color="primary"
-                        className={classes.margin}
-                        type="submit"
-                        onClick={()=>setSubmitted(true)}
-                        style={{
-                            fontSize: "1.3rem",
-                            width: "100%",
-                        }}
-                    >
-                        Check Email
-                    </Button>
-                </form>
-            </div>
+            <Button
+                className={classes.btn}
+                variant="contained"
+                type={props.type}
+                color="primary"
+                fullWidth
+            >
+                {props.name}
+            </Button>
         </Fragment>
     )
 }
 
-export default ForgotPassForm
+const CustomTextField = ({label, ...props}) => {
+    const [ field, meta ] = useField(props)
 
+    return (
+        <Fragment>
+            <TextField 
+                label="Email"
+                {...field}
+                {...props}              
+                error={meta.touched && meta.error} 
+                helperText={meta.touched ? meta.error : ""}
+
+                inputProps={{ style: { fontSize: "1.6rem", }}}
+                InputLabelProps={{ style: { fontSize: "1.6rem" }}}
+                FormHelperTextProps={{ style: { fontSize: "1.1rem" } }}
+                fullWidth
+            />
+        </Fragment>
+    )
+}
+
+const ForgotPass = props => {
+    const history = useHistory()
+
+    return (
+        <Fragment>
+            <Formik
+                initialValues= {{
+                    email: '',
+                }}
+                validationSchema={Yup.object({
+                    email: Yup.string()
+                        .email('Invalid Email')
+                        .required('Required')
+                })}
+                onSubmit = {async (values) => {
+                    const { email } = values
+                    try {
+                        await auth.sendPasswordResetEmail(email)
+                        .then(()=>console.log('we got the package son'))
+                        .catch(()=>console.log("som'n went wrong brother"))
+                        .then(()=>history.goBack())
+                    } catch (err) {
+                        console.log(err)
+                    }
+                }} 
+            >
+                { props => (
+                    <Form className="form-box">
+                        <div className="forgot-password-text">Forgot Password</div>
+                        <CustomTextField 
+                            label="Email"
+                            name="email"
+                            type="email"
+                        />
+                        <CustomButton 
+                            name="Send Password Verification"
+                            type="submit"
+                        />
+                    </Form>
+                )}
+            </Formik>
+        </Fragment>
+    )
+}
+
+export default ForgotPass

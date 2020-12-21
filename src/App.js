@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import './default.scss'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { auth, handleProfile } from './firebase/utils'
@@ -16,12 +16,12 @@ import Women from './pages/Women'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/Actions'
 
-class App extends Component {
-  authListener = null
+const App = props => {
+  const { currentUser, setCurrentUser } = props
 
-  componentDidMount () {
-   const { setCurrentUser } = this.props
-    this.authListener = auth.onAuthStateChanged( async userAuth => {
+  useEffect(()=>{
+
+    const authListener = auth.onAuthStateChanged( async userAuth => {
       if (userAuth) {
          // Fetch User Ref 
          const userRef = await handleProfile(userAuth)
@@ -37,15 +37,12 @@ class App extends Component {
       }
       
     })
-  }
 
+    return () => {
+      authListener()
+    }
+  },[])
 
-  componentWillUnmount () {
-    this.authListener()
-  }
-  
-  render () { 
-    const { currentUser } = this.props
 
     return (
         <div className="App">
@@ -85,7 +82,7 @@ class App extends Component {
           </Switch>
         </div>
     );
-  }
+  
 }
 
 const mapStateToProps = ({ user }) => ({
