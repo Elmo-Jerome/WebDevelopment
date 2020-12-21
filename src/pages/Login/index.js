@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginForm from '../../components/SignIn'
+import LoginForm from '../../components/SignInForm'
 
 const Login = props => {
     return (

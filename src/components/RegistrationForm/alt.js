@@ -1,10 +1,17 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Button, TextField } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles'
-import { auth, handleProfile } from '../../firebase/utils'
 import { Formik, Form, useField } from 'formik'
 import * as Yup from 'yup'
 import './alt.scss'
+///// REDUX /////
+import { useSelector, useDispatch } from 'react-redux'
+import { createUser } from '../../redux/Actions'
+const mapState = ({ user }) => ({
+    signInSuccess: user.signInSuccess,
+})
+
 
 // Custom Fields & css on js
 
@@ -61,18 +68,19 @@ const CustomButton = props => {
 
 // Exported Form
 const RegistrationForm = props => {
-
+    const { signInSuccess } = useSelector(mapState)
+    const history = useHistory()
+    const dispatch = useDispatch()
     const handleChange = async (values) => {
-        console.log(values)
-        const { displayName, email, password } = values
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword( email, password )
-            handleProfile(user, {displayName})
-
-        } catch (err) {
-            console.log(err)
-        }
+        const { email, password, displayName } = values
+        await dispatch(createUser({email, password, displayName}))
     }
+
+    useEffect(()=>{
+        if(signInSuccess) {
+            history.push('/')
+        }
+    }, [signInSuccess])
 
     return (
         <Fragment>

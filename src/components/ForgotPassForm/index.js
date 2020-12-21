@@ -59,7 +59,6 @@ const CustomTextField = ({label, ...props}) => {
 
 const ForgotPass = props => {
     const history = useHistory()
-
     return (
         <Fragment>
             <Formik

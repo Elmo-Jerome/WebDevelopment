@@ -9,15 +9,23 @@ import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
 import LoginPage from './pages/Login'
 import ForgotPass from './pages/ForgotPassword'
+import Dashboard from './pages/Dashboard'
 import Men from './pages/Men'
 import Women from './pages/Women'
 
+////// hoc /////
+import WithAuth from './components/hoc/withAuth'
+
 ///// Redux /////
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentUser } from './redux/Actions'
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser,
+})
 
 const App = props => {
-  const { currentUser, setCurrentUser } = props
+  const dispatch = useDispatch()
+  const { currentUser } = useSelector(mapState)
 
   useEffect(()=>{
 
@@ -27,13 +35,13 @@ const App = props => {
          const userRef = await handleProfile(userAuth)
          // Set State on Fetch 
          userRef.onSnapshot(user => {
-          setCurrentUser ( {  
-            id: user.id,
-            ...user.data() 
-          })
+            dispatch(setCurrentUser ({  
+              id: user.id,
+              ...user.data() 
+            }))
          })     
       } else {
-      setCurrentUser(userAuth)
+        dispatch(setCurrentUser(userAuth))
       }
       
     })
@@ -79,14 +87,17 @@ const App = props => {
                 <ForgotPass />
               </MainLayout>
             )} />
+             <Route exact path="/dashboard" render={()=> (
+              <WithAuth>
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
+              </WithAuth>
+            )} />
           </Switch>
         </div>
     );
   
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
-})
-
-export default connect(mapStateToProps, { setCurrentUser }) (App);
+export default App

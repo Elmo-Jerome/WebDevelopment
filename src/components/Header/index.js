@@ -1,17 +1,21 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import './style.scss'
 
+const mapState = ({ user }) => ({
+    currentUser: user.currentUser
+})
 
 
 const Header = props => {
+    const { currentUser } = useSelector(mapState)
     const [ user, setUser ] = useState(null);
 
     useEffect(() => {
-        props.currentUser ? setUser(props.currentUser) : setUser(null)
-    }, [props.currentUser])
+        currentUser ? setUser(currentUser) : setUser(null)
+    }, [currentUser])
 
     return (
         <header className="header">
@@ -25,7 +29,7 @@ const Header = props => {
                {!user && 
                <Fragment>
                     <div className="nav-item">
-                        <Link to="/registration">REGISTER</Link>
+                        <Link to="/registration">SIGN UP</Link>
                     </div>
                     <div className="nav-item">
                         <Link to="/login">LOGIN</Link>
@@ -37,6 +41,9 @@ const Header = props => {
                     <div className="nav-item">
                         <a onClick={() => auth.signOut()}>LOGOUT</a>
                     </div>
+                    <div className="nav-item">
+                        <Link to="/dashboard">MY ACCOUNT</Link>
+                    </div>
                 </Fragment>
                 }
             </div>
@@ -46,8 +53,4 @@ const Header = props => {
 
 }
 
-const mapStateToProps = ({ user }) => ({
-    currentUser: user.currentUser
-})
-
-export default connect(mapStateToProps, null)(Header)
+export default Header

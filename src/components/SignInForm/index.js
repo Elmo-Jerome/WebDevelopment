@@ -1,11 +1,19 @@
-import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { Formik, useField, Form } from 'formik'
 import * as Yup from 'yup'
 import { TextField, Button } from '@material-ui/core'
 import { makeStyles } from "@material-ui/styles"
-import { auth, signInWithGoogle } from '../../firebase/utils'
+import { signInWithGoogle } from '../../firebase/utils'
 import './style.scss'
+
+///// REDUX /////
+import { useDispatch, useSelector } from 'react-redux'
+import { signInUser } from '../../redux/Actions'
+const mapState = ({ user }) => ({
+    signInSuccess: user.signInSuccess,
+})
+
 
 const useStyle = makeStyles({
     margins: {
@@ -56,10 +64,22 @@ const CustomButton = (props) => {
 }
 
 const LoginForm = props => {
+
+    const { signInSuccess } = useSelector(mapState)
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+
     const handleSubmit = async (values) => {
         const { email, password } = values
-        await auth.signInWithEmailAndPassword(email, password)
+        await dispatch(signInUser({email, password}))        
     }
+
+    useEffect(()=>{
+        if(signInSuccess) {
+            history.push('/')
+        }
+    }, [signInSuccess])
     return (
         <Fragment>
             <Formik
