@@ -1,11 +1,17 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form, useField } from 'formik'
 import * as Yup from 'yup'
 import { TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import { auth } from '../../firebase/utils'
 import './style.scss'
+
+///// REDUX /////
+import { useDispatch, useSelector } from 'react-redux'
+import { EmailResetPassword } from '../../redux/Actions'
+const mapState = ({ user }) =>({
+    passwordResetEmailSent : user.passwordResetEmailSent,
+})
 
 
 const useStyle = makeStyles({
@@ -58,7 +64,15 @@ const CustomTextField = ({label, ...props}) => {
 }
 
 const ForgotPass = props => {
+    const { passwordResetEmailSent } = useSelector(mapState)
+    const dispatch = useDispatch()
     const history = useHistory()
+
+    useEffect(()=>{
+        if (passwordResetEmailSent) {
+            history.goBack()
+        }
+    }, [passwordResetEmailSent])
     return (
         <Fragment>
             <Formik
@@ -73,10 +87,7 @@ const ForgotPass = props => {
                 onSubmit = {async (values) => {
                     const { email } = values
                     try {
-                        await auth.sendPasswordResetEmail(email)
-                        .then(()=>console.log('we got the package son'))
-                        .catch(()=>console.log("som'n went wrong brother"))
-                        .then(()=>history.goBack())
+                        await dispatch(EmailResetPassword({ email }))
                     } catch (err) {
                         console.log(err)
                     }

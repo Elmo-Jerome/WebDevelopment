@@ -1,20 +1,19 @@
 import React, { Fragment, useEffect } from 'react'
-import { Button, TextField } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import { Formik, Form, useField } from 'formik'
 import * as Yup from 'yup'
 import './alt.scss'
 ///// REDUX /////
 import { useSelector, useDispatch } from 'react-redux'
-import { createUser } from '../../redux/Actions'
+import { CreateUser } from '../../redux/Actions'
 const mapState = ({ user }) => ({
     signInSuccess: user.signInSuccess,
 })
 
 
 // Custom Fields & css on js
-
 const useStyle = makeStyles({
     margins: {
         marginTop: "0.5rem",
@@ -71,11 +70,12 @@ const RegistrationForm = props => {
     const { signInSuccess } = useSelector(mapState)
     const history = useHistory()
     const dispatch = useDispatch()
+
     const handleChange = async (values) => {
         const { email, password, displayName } = values
-        await dispatch(createUser({email, password, displayName}))
+        await dispatch(CreateUser({email, password, displayName}))
     }
-
+    // Redirect user To Homepage after successful Sign in
     useEffect(()=>{
         if(signInSuccess) {
             history.push('/')

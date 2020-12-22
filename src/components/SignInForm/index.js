@@ -9,9 +9,9 @@ import './style.scss'
 
 ///// REDUX /////
 import { useDispatch, useSelector } from 'react-redux'
-import { signInUser } from '../../redux/Actions'
+import { emailSignInStart } from '../../redux/Actions'
 const mapState = ({ user }) => ({
-    signInSuccess: user.signInSuccess,
+    currentUser: user.currentUser,
 })
 
 
@@ -65,21 +65,21 @@ const CustomButton = (props) => {
 
 const LoginForm = props => {
 
-    const { signInSuccess } = useSelector(mapState)
+    const { currentUser } = useSelector(mapState)
     const dispatch = useDispatch()
     const history = useHistory()
 
 
     const handleSubmit = async (values) => {
         const { email, password } = values
-        await dispatch(signInUser({email, password}))        
+        await dispatch(emailSignInStart({email, password}))        
     }
 
-    useEffect(()=>{
-        if(signInSuccess) {
-            history.push('/')
+    useEffect(async()=>{
+        if(currentUser) {
+            await history.push('/')
         }
-    }, [signInSuccess])
+    }, [currentUser])
     return (
         <Fragment>
             <Formik

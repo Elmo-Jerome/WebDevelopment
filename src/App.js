@@ -17,39 +17,13 @@ import Women from './pages/Women'
 import WithAuth from './components/hoc/withAuth'
 
 ///// Redux /////
-import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentUser } from './redux/Actions'
+import { useSelector } from 'react-redux'
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 })
 
 const App = props => {
-  const dispatch = useDispatch()
   const { currentUser } = useSelector(mapState)
-
-  useEffect(()=>{
-
-    const authListener = auth.onAuthStateChanged( async userAuth => {
-      if (userAuth) {
-         // Fetch User Ref 
-         const userRef = await handleProfile(userAuth)
-         // Set State on Fetch 
-         userRef.onSnapshot(user => {
-            dispatch(setCurrentUser ({  
-              id: user.id,
-              ...user.data() 
-            }))
-         })     
-      } else {
-        dispatch(setCurrentUser(userAuth))
-      }
-      
-    })
-
-    return () => {
-      authListener()
-    }
-  },[])
 
 
     return (
