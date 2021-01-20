@@ -1,13 +1,176 @@
 <!DOCTYPE html>
-<html lang="en" data-color-mode="light">
-    <head>
-        <meta charset="utf-8">
-        <title>PC Mechanic</title>
-    </head>
-    <body>
-        <form action="#" method="POST">
-            
-            
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>PC Mechanic</title>
+</head>
+<body>
+    <!-- navigation bar -->
+    <nav>
+        <div class="menu-icon"><span class="fas fa-bars"></span></div>
+        <div class="logo">PC Mechanic</div>
+        <div class="nav-items">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Contacts</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Feedback</a></li>
+          <li><a href="#" class="toLogin">Login</a></li>
+        </div>
+        <div class="search-icon"><span class="fas fa-search"></span></div>
+        <div class="cancel-icon"><span class="fa fa-times"></span></div>
+        <form action="#">
+          <input type="search" class="search-data" placeholder="What are you looking for?" required>
+          <button type="submit" class="fas fa-search"></button>
         </form>
-    </body>
+    </nav>
+
+    <div class="content-container" id="blur">
+            <!-- carousel -->
+        <div class="carousel-container">
+            <i class="fas fa-arrow-alt-circle-left" id="prevbtn"></i>
+            <i class="fas fa-arrow-alt-circle-right" id="nextbtn"></i>
+            <div class="carousel-slide">
+                <img src="./images/img5.jpg" id="lastClone" alt="">
+                <img src="./images/img1.jpg" alt="">
+                <img src="./images/img2.jpg" alt="">
+                <img src="./images/img3.jpg" alt="">
+                <img src="./images/img4.jpg" alt="">
+                <img src="./images/img5.jpg" alt="">
+                <img src="./images/img1.jpg" id="firstClone" alt="">
+            </div>
+        </div>
+
+        <!-- on sale div  -->
+        <div class="onSale-container">
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+                <div class="product-container">
+                    <div class="picture"></div>
+                    <div class="product-name">Lorem Ipsum</div>
+                    <div class="price">$100.00</div>
+                    <button type="submit">Quick View</button>
+                </div>
+        </div>
+
+    </div>
+    <!-- sign up div -->
+    <div class="login-container">
+        <div class="text">Member Login</div>
+        <label for="show" class="close-btn fas fa-times" title="close"></label>
+        <form action="#">
+            <div class="data">
+                <label>Username</label>
+                <input type="text" required/>
+            </div>
+            <div class="data">
+                <label>Password</label>
+                <input type="password" required/>
+            </div>
+            <div class="forgot-pass"><a href="#">Forgot Password?</a></div>
+                <div class="btn">
+                <div class="inner"></div>
+                <button type="submit">login</button>
+            </div>
+            <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+        </form>
+    </div>
+   <!-- footer areaaaaaa -->
+    <footer>
+        <div class="top-footer">
+            <div class="left-footer">
+                <h2>About Us</h2>
+                <h3>PC Mechanic</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur sint aperiam odit numquam molestiae, eligendi reiciendis, corporis sequi quas quibusdam similique animi veniam in. Dolor vel quidem quasi maiores veniam.</p>
+            </div>
+
+            <div class="center-footer">
+                <h2>Contact Us</h2>
+                <div class="contact-container">
+                    <div class="place">
+                        <span class="text">Afasdfawef, Qasdfgadfa</span>
+                    </div>
+                    <div class="phone">
+                        <span class="text">+63 949 1234 789 | </span>
+                        <span class="text"> +02 7210-1234</span>
+                    </div>
+                    <div class="email-add">
+                        <span class="text">example@example.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-footer">
+                <h2>Suggestions</h2>
+            <div class="suggestion-container">
+                <form action="#">
+                    <div class="email">
+                        <div class="text">Email *</div>
+                        <input type="email" required>
+                    </div>
+                    <div class="msg">
+                        <div class="text">Message *</div>
+                        <textarea rows="3" cols="30" required></textarea>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        
+        <div class="bottom-footer">
+            <span class="credit">Created By Chrome Wolves | </span>
+          <span class="far fa-copyright"></span><span> 2021 All rights reserved.</span>
+        </div>
+    </footer>
+    <script src="javascript.js"></script>
+</body>
 </html>
