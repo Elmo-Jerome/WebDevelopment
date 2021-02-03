@@ -4,7 +4,9 @@ import './default.scss'
 
 ///// Layouts /////
 import MainLayout from './layouts/MainLayout'
+import AuthLayout from './layouts/AuthLayout'
 ///// Pages /////
+import LandingPage from './pages/Landing'
 import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
 import LoginPage from './pages/Login'
@@ -33,14 +35,15 @@ const App = props => {
           <Switch>
             <Route exact path="/" render={() => (
                 <MainLayout>
-                  <Homepage />
+                  <LandingPage />
+                  {/* <Homepage /> */}
                 </MainLayout>)}
               />
               <Route exact path="/registration" 
                 render={() => (
-                  <MainLayout>
+                  <AuthLayout>
                     <RegistrationPage />
-                  </MainLayout>)}
+                  </AuthLayout>)}
               />
               <Route exact path="/men" render={() => (
                 <MainLayout>
@@ -54,9 +57,9 @@ const App = props => {
               )} />
               <Route exact path="/login" 
                 render={() => (
-                  <MainLayout>
+                  <AuthLayout>
                     <LoginPage />
-                  </MainLayout>
+                  </AuthLayout>
               )} />
               <Route exact path="/forgotpassword" render={()=> (
                 <MainLayout>

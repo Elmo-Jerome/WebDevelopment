@@ -3,6 +3,8 @@ import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutUser, checkUserSession } from '../../redux/Actions'
+import { IconButton } from '@material-ui/core'
+import {ReactComponents as Logo} from '../../assets/circuit.svg'
 import './style.scss'
 
 const mapState = ({ user }) => ({
@@ -34,19 +36,24 @@ const Header = props => {
         <header className="header">
            <div className="header-wrap">
             <div className="logo-container">
-                <Link to="/">
-                        <div className="logo" />
-                </Link>    
+                    <Logo />
+                    {/* <Link to="/">
+                        <div className="logo"></div>
+                    </Link>    */}
             </div>        
             <div className="nav-items-grid">
                {!user && 
                <Fragment>
-                    <div className="nav-item">
-                        <Link to="/registration">SIGN UP</Link>
-                    </div>
-                    <div className="nav-item">
-                        <Link to="/login">LOGIN</Link>
-                    </div>
+                    <Link to="/registration">
+                        <div className="nav-item sign-up">
+                         <a>SIGN UP</a>
+                        </div>
+                    </Link>
+                    <Link to="/login">
+                        <div className="nav-item">
+                            <a>LOGIN</a>
+                        </div>
+                    </Link>
                 </Fragment>
                 }
                 {user && 

@@ -1,5 +1,82 @@
 .footer {
     margin-top: 2rem;
+    padding: 10rem 5rem 0 5rem;
+    color: white;
     font-size: 2rem;
-    text-align: center;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #0f0f0f,#181818, );
+
+   
+    .footer-content {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 5rem;
+        .logo-footer {
+            display: flex;
+            flex-direction: column;
+            h1 {
+                font-family: 'Potta One', cursive;
+                font-size: 2.5rem;
+            }
+            .icon-button-grid {
+                display: flex;
+            }
+        }
+        h2 {
+            font-size: 1.8rem;
+            color: #9e9e9e;
+        }
+        p {
+            padding: 1rem 3rem 0 1rem ;
+            font-size:1.5rem;
+            line-height: 1.8rem;
+            text-align: justify;
+        }
+        div {
+            width: 100%;
+        }
+        .contact {
+            p {
+                font-weight: bold;
+            }
+        }
+        .suggestions {
+            .email {
+                color: white !important;
+            }
+            button {
+                margin-top: 1rem;
+                color: white !important;
+                text-transform: none !important;
+                font-size: 1.2rem !important;
+                border: 1px solid white;
+                transition: all 0.3s ease-in-out;
+                &:hover {
+                    background: white;
+                    color: black !important;
+                }
+            }
+            textarea {
+                margin-top: 1rem !important;
+                resize: none !important;
+                width: 100%;
+                height: 7rem !important;
+                font-size: 1.6rem !important;
+                font-family: 'Be Vietnam', sans-serif;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            flex-direction: column;
+        }
+    }
+
+    .copyright {
+        text-align: center;
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
 }
