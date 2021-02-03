@@ -6,7 +6,7 @@ export default function AuthLayout (props) {
         <Fragment>
             <Header />
             <div className="content">
-                {props.children}
+                { props.children }
             </div>
         </Fragment>
     )

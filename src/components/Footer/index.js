@@ -92,8 +92,10 @@ const Footer = props => {
                                 message: Yup.string().required('Required'),
                             })}
                             onSubmit={ async (values, {resetForm}) => {
-                                await handleSubmit(values)
-                                resetForm()
+                                try {
+                                    await handleSubmit(values)
+                                    resetForm()
+                                } catch(err) { console.log(err) }
                             }}>
                             {props => (
                                 <Form>
@@ -104,6 +106,7 @@ const Footer = props => {
                                         type="email"/>
 
                                     <TextareaAutosize 
+                                        onChange={props.onChange}
                                         name="message"
                                         placeholder=" Leave us a message!" />
                                        

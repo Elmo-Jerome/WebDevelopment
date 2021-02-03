@@ -1,51 +1,73 @@
-.header {
-    height: auto;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    background-color: white;
-    z-index: 3;
-    
-    .sign-up{
-        background: linear-gradient(to bottom right, #F7959D,#F7B1AC, #F7D3BB);
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        color: white;
-        a {
-            color: white;
-        }
-        &:hover {
-            filter:brightness(110%)
-        }
-    }
-}
+$text-color: white;
+$header-background: #0b0b0e;
+$link-hover-color: #18DEC9;
+
 .header-wrap {
     height: 100%;
     max-width: 90%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 0.6fr 9fr;
+    grid-template-columns: 3fr 9fr;
+}
+
+.header {
+    height: auto;
+    width: 1250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    background: $header-background;
+    z-index: 3;
+    
+    .login {
+        a {
+            color: $text-color !important;
+            &:hover {
+                color: $link-hover-color !important;
+            }
+        }
+    }
+    .sign-up{
+        background: linear-gradient(to bottom right, #1CB351,#18DEC9) !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease-in-out;
+        color: white !important;
+
+        a {
+            color: $text-color !important;
+        }
+        &:hover {
+            filter:brightness(80%);
+        }
+    }
 }
 .logo-container {
-    height: 4rem;
+    height: auto;
+    .logo {
+        height: 100%;
+        padding: 0 !important;
+        span {
+            font-family: "Ailerons" !important;
+            margin: 0 0.5rem !important;
+            padding: 0 !important;
+            font-size: 2.5rem !important;
+            text-transform: none !important;
+            color:$text-color;
+        }
+    }    
 }
-.logo {
-    height: 100%;
-    width: 100%;
-    background: url('../../assets/microchip.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 30%;
+.logo-alt {
+    height: 3rem;
+    width: auto;
 }
 
 .nav-item {
-    float: right;
-    margin: 0.5rem 0;
-    font-weight: bold;
-    box-sizing: border-box;
-    padding: 1rem 2rem;
-    border-radius: 30px;
+    float: right !important;
+    margin: 1rem 0 !important;
+    font-weight: bold !important;
+    box-sizing: border-box !important;
+    padding: 0.5rem 2rem !important;
+    border-radius: 10px !important;
 }
 
 

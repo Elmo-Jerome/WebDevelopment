@@ -3,8 +3,9 @@ import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutUser, checkUserSession } from '../../redux/Actions'
-import { IconButton } from '@material-ui/core'
-import {ReactComponents as Logo} from '../../assets/circuit.svg'
+import { IconButton, Button } from '@material-ui/core'
+// import Logo from '../../assets/circuit.svg'
+import Logo from '../../assets/microchip.png'
 import './style.scss'
 
 const mapState = ({ user }) => ({
@@ -36,23 +37,29 @@ const Header = props => {
         <header className="header">
            <div className="header-wrap">
             <div className="logo-container">
-                    <Logo />
-                    {/* <Link to="/">
-                        <div className="logo"></div>
-                    </Link>    */}
+                <Link to="/">
+                   {/* <IconButton onClick={() => console.log('/home')}>
+                        <img src={Logo}  className="logo-alt"/>
+                   </IconButton> */}
+                   <Button 
+                    className="logo"
+                    fullWidth
+                    startIcon={<img src={Logo}  className="logo-alt"/>}
+                   >PC Mechanic</Button>
+                </Link>
             </div>        
             <div className="nav-items-grid">
                {!user && 
                <Fragment>
                     <Link to="/registration">
-                        <div className="nav-item sign-up">
+                        <Button className="nav-item sign-up">
                          <a>SIGN UP</a>
-                        </div>
+                        </Button>
                     </Link>
                     <Link to="/login">
-                        <div className="nav-item">
+                        <Button className="nav-item login">
                             <a>LOGIN</a>
-                        </div>
+                        </Button>
                     </Link>
                 </Fragment>
                 }
