@@ -23,6 +23,10 @@ $link-color: rgb(0, 47, 255);
         width: 80%;
     }
 
+    .error {
+        color: red;
+    }
+
     h1 {
         text-align: center;
         color: $text-color;
@@ -33,5 +37,14 @@ $link-color: rgb(0, 47, 255);
         font-size: 1.3rem;
         color: $link-color;
         cursor: pointer;
+    }
+    .login-btn {
+       
+    }
+    .google-login-btn {
+        background-color: #ff1100 !important;
+        &:hover {
+            background-color: darken(#ff1100, 15% ) !important;
+        }
     }
 }

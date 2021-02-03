@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import './default.scss'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { auth, handleProfile } from './firebase/utils'
+
 ///// Layouts /////
 import MainLayout from './layouts/MainLayout'
 ///// Pages /////
@@ -9,6 +9,7 @@ import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
 import LoginPage from './pages/Login'
 import ForgotPass from './pages/ForgotPassword'
+import PasswordResetSent from './pages/PasswordResetSent'
 import Dashboard from './pages/Dashboard'
 import Men from './pages/Men'
 import Women from './pages/Women'
@@ -17,57 +18,63 @@ import Women from './pages/Women'
 import WithAuth from './components/hoc/withAuth'
 
 ///// Redux /////
-import { useSelector } from 'react-redux'
-const mapState = ({ user }) => ({
-  currentUser: user.currentUser,
-})
+import { checkUserSession } from './redux/Actions'
+import { useDispatch } from 'react-redux'
 
 const App = props => {
-  const { currentUser } = useSelector(mapState)
+  const dispatch = useDispatch()
 
+  useEffect(()=>{
+    dispatch(checkUserSession())
+  },[])
 
     return (
         <div className="App">
           <Switch>
             <Route exact path="/" render={() => (
-              <MainLayout>
-                <Homepage />
-              </MainLayout>)}
-            />
-            <Route exact path="/registration" 
-              render={() => currentUser ? <Redirect to="/" /> : (
                 <MainLayout>
-                  <RegistrationPage />
+                  <Homepage />
                 </MainLayout>)}
-            />
-            <Route exact path="/men" render={() => (
-              <MainLayout>
-                <Men />
-              </MainLayout>
-            )} />
-            <Route exact path="/women" render={() => (
-              <MainLayout>
-                <Women />
-              </MainLayout>
-            )} />
-            <Route exact path="/login" 
-              render={() => currentUser ? <Redirect to="/" /> : (
+              />
+              <Route exact path="/registration" 
+                render={() => (
+                  <MainLayout>
+                    <RegistrationPage />
+                  </MainLayout>)}
+              />
+              <Route exact path="/men" render={() => (
                 <MainLayout>
-                  <LoginPage />
+                  <Men />
                 </MainLayout>
-            )} />
-            <Route exact path="/forgotpassword" render={()=> (
-              <MainLayout>
-                <ForgotPass />
-              </MainLayout>
-            )} />
-             <Route exact path="/dashboard" render={()=> (
-              <WithAuth>
+              )} />
+              <Route exact path="/women" render={() => (
                 <MainLayout>
-                  <Dashboard />
+                  <Women />
                 </MainLayout>
-              </WithAuth>
-            )} />
+              )} />
+              <Route exact path="/login" 
+                render={() => (
+                  <MainLayout>
+                    <LoginPage />
+                  </MainLayout>
+              )} />
+              <Route exact path="/forgotpassword" render={()=> (
+                <MainLayout>
+                  <ForgotPass />
+                </MainLayout>
+              )} />
+              <Route exact path="/password-reset-sent" render={()=>(
+                <MainLayout>
+                  <PasswordResetSent />
+                </MainLayout>
+              )} />
+              <Route exact path="/dashboard" render={()=> (
+                <WithAuth>
+                  <MainLayout>
+                    <Dashboard />
+                  </MainLayout>
+                </WithAuth>
+              )} />
           </Switch>
         </div>
     );
@@ -75,3 +82,49 @@ const App = props => {
 }
 
 export default App
+
+
+// <Route exact path="/" render={() => (
+//   <MainLayout>
+//     <Homepage />
+//   </MainLayout>)}
+// />
+// <Route exact path="/registration" 
+//   render={() => currentUser ? <Redirect to="/" /> : (
+//     <MainLayout>
+//       <RegistrationPage />
+//     </MainLayout>)}
+// />
+// <Route exact path="/men" render={() => (
+//   <MainLayout>
+//     <Men />
+//   </MainLayout>
+// )} />
+// <Route exact path="/women" render={() => (
+//   <MainLayout>
+//     <Women />
+//   </MainLayout>
+// )} />
+// <Route exact path="/login" 
+//   render={() => currentUser ? <Redirect to="/" /> : (
+//     <MainLayout>
+//       <LoginPage />
+//     </MainLayout>
+// )} />
+// <Route exact path="/forgotpassword" render={()=> (
+//   <MainLayout>
+//     <ForgotPass />
+//   </MainLayout>
+// )} />
+// <Route exact path="/password-reset-sent" render={()=>(
+//   <MainLayout>
+//     <PasswordResetSent />
+//   </MainLayout>
+// )} />
+//  <Route exact path="/dashboard" render={()=> (
+//   <WithAuth>
+//     <MainLayout>
+//       <Dashboard />
+//     </MainLayout>
+//   </WithAuth>
+// )} />

@@ -3,13 +3,15 @@ import {
     SIGN_IN_SUCCESS, 
     SIGN_UP_USER_START, 
     SET_CURRENT_USER, 
-    PASSWORD_RESET_EMAIL_SENT } from '../Types'
+    PASSWORD_RESET_EMAIL_SENT,
+    CHECK_USER_SESSION } from '../Types'
+import { authActions } from '../Types'
 import { auth } from '../../firebase/utils'
 
 // Saga Actions
-export const emailSignInStart = userCreds => ({ 
+export const emailSignInStart = ({email, password}) => ({ 
     type: EMAIL_SIGN_IN_START,
-    payload: userCreds,
+    payload: {email, password},
 })
 
 export const signInSuccess = user => ({
@@ -17,15 +19,47 @@ export const signInSuccess = user => ({
     payload: user
 })
 
-export const CreateUser = userCreds => ({
+export const createUser = ({email, password, displayName}) => ({
     type: SIGN_UP_USER_START,
-    payload: userCreds,
+    payload: {email, password, displayName},
 })
 
+export const checkUserSession = () => ({
+    type: CHECK_USER_SESSION,
+})
 
+export const displayError = (errorMsg) => ({
+    type: authActions.AUTHENTICATION_ERROR, 
+    payload: {errorMsg}
+})
 
+// Thunk Actions
+export const logoutUser = () => dispatch => {
+    dispatch({
+        type: SIGN_IN_SUCCESS,
+        payload: false,
+    })
+}
 
+export const EmailResetPassword = ({ email }) => async (dispatch) => {
+    try {
+        await auth.sendPasswordResetEmail(email)
+        dispatch({
+            type: PASSWORD_RESET_EMAIL_SENT,
+            payload: true,
+        })
 
+    } catch(err) { console.log(err) }
+} 
+
+export const passwordResetEmailReset = () => dispatch => {
+    try {
+        dispatch({
+            type: PASSWORD_RESET_EMAIL_SENT,
+            payload: false,
+        })
+    } catch(err) { console.log(err) }
+}
 
 // Thunk Actions
 export const setCurrentUser = user => dispatch => {
@@ -34,7 +68,6 @@ export const setCurrentUser = user => dispatch => {
         payload: user
     })
 }
-
 // export const signInUser = ({ email, password}) => async dispatch => {
 //     try {
 //         await auth.signInWithEmailAndPassword(email, password)  
@@ -58,21 +91,3 @@ export const setCurrentUser = user => dispatch => {
 //         console.log(err)
 //     }
 // }
-
-export const logoutUser = () => dispatch => {
-    dispatch({
-        type: SIGN_IN_SUCCESS,
-        payload: false,
-    })
-}
-
-export const EmailResetPassword = ({ email }) => async (dispatch) => {
-    try {
-        await auth.sendPasswordResetEmail(email)
-        dispatch({
-            type: PASSWORD_RESET_EMAIL_SENT,
-            payload: true,
-        })
-
-    } catch(err) { console.log(err) }
-} 

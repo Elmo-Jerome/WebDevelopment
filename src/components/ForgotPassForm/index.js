@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form, useField } from 'formik'
 import * as Yup from 'yup'
@@ -65,14 +65,21 @@ const CustomTextField = ({label, ...props}) => {
 
 const ForgotPass = props => {
     const { passwordResetEmailSent } = useSelector(mapState)
+    const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(()=>{
         if (passwordResetEmailSent) {
-            history.goBack()
+            // alert('Password Reset Sent! Please check your email')
+            history.push('/password-reset-sent')
         }
     }, [passwordResetEmailSent])
+    useEffect(() => {
+        if(error) {
+            console.log(error)
+        }
+    },[error])
     return (
         <Fragment>
             <Formik
@@ -84,12 +91,13 @@ const ForgotPass = props => {
                         .email('Invalid Email')
                         .required('Required')
                 })}
-                onSubmit = {async (values) => {
+                onSubmit = {async (values, {resetForm}) => {
                     const { email } = values
                     try {
                         await dispatch(EmailResetPassword({ email }))
+                        resetForm()
                     } catch (err) {
-                        console.log(err)
+                        setError(err)
                     }
                 }} 
             >

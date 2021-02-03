@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Formik, useField, Form } from 'formik'
 import * as Yup from 'yup'
@@ -9,9 +9,11 @@ import './style.scss'
 
 ///// REDUX /////
 import { useDispatch, useSelector } from 'react-redux'
-import { emailSignInStart } from '../../redux/Actions'
+import { emailSignInStart, checkUserSession ,passwordResetEmailReset } from '../../redux/Actions'
 const mapState = ({ user }) => ({
     currentUser: user.currentUser,
+    authError: user.authError,
+    passwordResetEmailSent: user.passwordResetEmailSent,
 })
 
 
@@ -49,7 +51,7 @@ const CustomButton = (props) => {
     return(
         <Fragment>
             <Button
-                className={classes.margins}
+                className={`${classes.margins} ${props.class}`}
                 variant="contained"
                 type={props.type}
                 onClick={props.onClick}
@@ -65,7 +67,8 @@ const CustomButton = (props) => {
 
 const LoginForm = props => {
 
-    const { currentUser } = useSelector(mapState)
+    const { currentUser, authError, passwordResetEmailSent } = useSelector(mapState)
+    const [error, setError] = useState('')
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -75,18 +78,40 @@ const LoginForm = props => {
         await dispatch(emailSignInStart({email, password}))        
     }
 
+    const handleGoogleSignIn = async() => {
+     // console.log('handleGoogleSignIn')
+     // const { user } = await signInWithGoogle()
+     // console.log(user)
+     await signInWithGoogle()     
+     dispatch(checkUserSession())
+    }
+
+    useEffect(async()=>{
+        if (passwordResetEmailSent) {
+            await dispatch(passwordResetEmailReset())
+        }
+    },[])
+
+    useEffect( () => {
+        if(authError) {
+            console.log(authError.errorMsg.code)
+            setError(authError.errorMsg.code)
+        }
+    },[authError])
+
     useEffect(async()=>{
         if(currentUser) {
             await history.push('/')
         }
     }, [currentUser])
+
     return (
         <Fragment>
             <Formik
                 initialValues={{
                     email: '',
                     password: '',
-                }}
+                }} 
                 validationSchema={Yup.object({
                     email: Yup.string()
                         .email('Invalid Email')
@@ -105,29 +130,34 @@ const LoginForm = props => {
                     props => (
                         <Form className="login-form">
                             <h1>Sign in</h1>
+                           {authError && (<p className="error">{error}</p>)}
                             <CustomTextField 
                                 label="Email"
                                 name="email" 
                                 type="email"
+                                placeholder="Enter your email"
                             />
                             <CustomTextField 
                                 label="Password"
                                 name="password"
                                 type="password"
+                                placeholder="Password"
                             />
                             <Link to="/forgotpassword">
                                Forgot Password?
                            </Link>
                            <CustomButton  
+                                class="login-btn"
                                 name="Login" 
                                 color="primary"
                                 type="submit"
                            />
                            <CustomButton
+                                class="google-login-btn"
                                 name="Continue With Google"
                                 color="secondary"
                                 type="button"
-                                onClick={signInWithGoogle}
+                                onClick={handleGoogleSignIn}
                            />
                            
                         </Form>

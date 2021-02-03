@@ -2,27 +2,22 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { auth } from '../../firebase/utils'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { logoutUser } from '../../redux/Actions'
+import { logoutUser, checkUserSession } from '../../redux/Actions'
 import './style.scss'
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser,
-    signInSuccess: user.signInSuccess,
 })
 
 
 const Header = props => {
     const dispatch = useDispatch()
-    const { currentUser, signInSuccess } = useSelector(mapState)
+    const { currentUser } = useSelector(mapState)
     const [ user, setUser ] = useState(null);
 
     useEffect(() => {
         currentUser ? setUser(currentUser) : setUser(null)
     }, [currentUser])
-
-    useEffect(()=>{
-        console.log(signInSuccess)
-    }, [signInSuccess])
 
     const Logout = async() => {
         await auth.signOut()
@@ -30,6 +25,10 @@ const Header = props => {
                 dispatch(logoutUser())
             })
     }
+    useEffect( () => {
+        dispatch(checkUserSession())
+    },[])
+    
 
     return (
         <header className="header">

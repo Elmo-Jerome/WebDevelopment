@@ -7,9 +7,9 @@ import * as Yup from 'yup'
 import './alt.scss'
 ///// REDUX /////
 import { useSelector, useDispatch } from 'react-redux'
-import { CreateUser } from '../../redux/Actions'
+import { createUser } from '../../redux/Actions'
 const mapState = ({ user }) => ({
-    signInSuccess: user.signInSuccess,
+    currentUser: user.currentUser,
 })
 
 
@@ -48,18 +48,18 @@ const CustomTextField = ({label, ...props}) => {
 }
 
 const CustomButton = props => {
+    const { type, color, name, className } = props
     const classes = useStyle()
     return (
         <Fragment>
             <Button
-                className={`${classes.margins} ${classes.btn}`}
+                className={`${classes.margins} ${classes.btn} ${className}`}
                 variant="contained"
-                type={props.type}
-                color={props.color}
+                type={type}
+                color={color}
                 fullWidth
-                onClick={props.OnClick}
             >
-                { props.name}
+                { name }
             </Button>
         </Fragment>
     )
@@ -67,20 +67,21 @@ const CustomButton = props => {
 
 // Exported Form
 const RegistrationForm = props => {
-    const { signInSuccess } = useSelector(mapState)
+    const { currentUser } = useSelector(mapState)
     const history = useHistory()
     const dispatch = useDispatch()
 
     const handleChange = async (values) => {
         const { email, password, displayName } = values
-        await dispatch(CreateUser({email, password, displayName}))
+        await dispatch(createUser({email, password, displayName}))
+        alert('sign up success')
     }
     // Redirect user To Homepage after successful Sign in
     useEffect(()=>{
-        if(signInSuccess) {
+        if(currentUser) {
             history.push('/')
         }
-    }, [signInSuccess])
+    }, [currentUser])
 
     return (
         <Fragment>
@@ -139,6 +140,7 @@ const RegistrationForm = props => {
                                 type="password"
                             />
                             <CustomButton 
+                                className="sign-up-btn"
                                 name="Sign up"
                                 type="submit"
                                 color="primary"
