@@ -5,7 +5,8 @@ import './default.scss'
 ///// Layouts /////
 import MainLayout from './layouts/MainLayout'
 import AuthLayout from './layouts/AuthLayout'
-///// Pages /////
+
+///// Pages (temporary) /////
 import LandingPage from './pages/Landing'
 import Homepage from './pages/Homepage'
 import RegistrationPage from './pages/Registration'
@@ -15,6 +16,10 @@ import PasswordResetSent from './pages/PasswordResetSent'
 import Dashboard from './pages/Dashboard'
 import Men from './pages/Men'
 import Women from './pages/Women'
+
+
+///// Pages /////
+import Home from './pages-alt/home'
 
 ////// hoc /////
 import WithAuth from './components/hoc/withAuth'
@@ -34,10 +39,8 @@ const App = props => {
         <div className="App">
           <Switch>
             <Route exact path="/" render={() => (
-                <MainLayout>
-                  <LandingPage />
-                  {/* <Homepage /> */}
-                </MainLayout>)}
+                  <Home />
+                )}
               />
               <Route exact path="/registration" 
                 render={() => (
@@ -86,6 +89,54 @@ const App = props => {
 
 export default App
 
+//// Working Routes
+  // <Switch>
+  //           <Route exact path="/" render={() => (
+  //               <MainLayout>
+  //                 <LandingPage />
+  //                 {/* <Homepage /> */}
+  //               </MainLayout>)}
+  //             />
+  //             <Route exact path="/registration" 
+  //               render={() => (
+  //                 <AuthLayout>
+  //                   <RegistrationPage />
+  //                 </AuthLayout>)}
+  //             />
+  //             <Route exact path="/men" render={() => (
+  //               <MainLayout>
+  //                 <Men />
+  //               </MainLayout>
+  //             )} />
+  //             <Route exact path="/women" render={() => (
+  //               <MainLayout>
+  //                 <Women />
+  //               </MainLayout>
+  //             )} />
+  //             <Route exact path="/login" 
+  //               render={() => (
+  //                 <AuthLayout>
+  //                   <LoginPage />
+  //                 </AuthLayout>
+  //             )} />
+  //             <Route exact path="/forgotpassword" render={()=> (
+  //               <MainLayout>
+  //                 <ForgotPass />
+  //               </MainLayout>
+  //             )} />
+  //             <Route exact path="/password-reset-sent" render={()=>(
+  //               <MainLayout>
+  //                 <PasswordResetSent />
+  //               </MainLayout>
+  //             )} />
+  //             <Route exact path="/dashboard" render={()=> (
+  //               <WithAuth>
+  //                 <MainLayout>
+  //                   <Dashboard />
+  //                 </MainLayout>
+  //               </WithAuth>
+  //             )} />
+  //         </Switch>
 
 // <Route exact path="/" render={() => (
 //   <MainLayout>

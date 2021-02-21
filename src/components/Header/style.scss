@@ -12,7 +12,7 @@ $link-hover-color: #18DEC9;
 
 .header {
     height: auto;
-    width: 1250px;
+    width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     position: fixed;
     top: 0;
@@ -61,13 +61,13 @@ $link-hover-color: #18DEC9;
     width: auto;
 }
 
-.nav-item {
-    float: right !important;
-    margin: 1rem 0 !important;
-    font-weight: bold !important;
-    box-sizing: border-box !important;
-    padding: 0.5rem 2rem !important;
-    border-radius: 10px !important;
-}
+// .nav-item {
+//     float: right !important;
+//     margin: 1rem 0 !important;
+//     font-weight: bold !important;
+//     box-sizing: border-box !important;
+//     padding: 0.5rem 2rem !important;
+//     border-radius: 10px !important;
+// }
 
 

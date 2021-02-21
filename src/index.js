@@ -4,6 +4,12 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import App from './App';
+import { dom } from '@fortawesome/fontawesome-svg-core'
+
+///// BOOTSTRAP /////
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,4 +21,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+dom.watch()
 
