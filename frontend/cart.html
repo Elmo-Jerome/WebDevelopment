@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/logo/LOGO.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>PC Mechanic - My Cart</title>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html"><img src="images/logo/LOGO NAME nav.png" alt="Home"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-3" type="search" placeholder="Search..." aria-label="Search">
+            <button class="btn btn-nav my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Cart adfadf -->
+    <div class="container mb-4">
+        <div class="divtxt">
+            <h1>My Cart</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col"> </th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Availability</th>
+                                <th scope="col" class="text-center">Quantity</th>
+                                <th scope="col" class="text-right">Price</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="images/products/ASUS ROG STRIX B450-F GAMING AM4 AMD B450 SATA 6Gbs ATX AMD Motherboard.jpg" class="cartimg"/> </td>
+                                <td>ASUS ROG STRIX B450-F GAMING</td>
+                                <td>In stock</td>
+                                <td><input class="form-control" type="text" value="1" /></td>
+                                <td class="text-right">₱2,199.00</td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/products/Intel Core i7-9700K Coffee Lake 8-Core 3.6 GHz (4.9 GHz Turbo) LGA 1151 (300 Series) 95W BX80684I79700K Desktop Processor Intel UHD Graphics 630.jpg" class="cartimg"/> </td>
+                                <td>Intel Core i7-9700K</td>
+                                <td>In stock</td>
+                                <td><input class="form-control" type="text" value="1" /></td>
+                                <td class="text-right">₱15,450.00</td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/products/CORSAIR Vengeance RGB Pro 32GB (2 x 16GB) 288-Pin DDR4 SDRAM DDR4 3600 (PC4 28800) Intel XMP 2.0 Desktop Memory Model CMW32GX4M2D3600C18.jpg" class="cartimg"/> </td>
+                                <td>CORSAIR Vengeance RGB Pro 32GB</td>
+                                <td>In stock</td>
+                                <td><input class="form-control" type="text" value="1" /></td>
+                                <td class="text-right">₱3,599.00</td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Sub-Total</td>
+                                <td class="text-right">₱21,248.00</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Shipping</td>
+                                <td class="text-right">₱120.00</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total</strong></td>
+                                <td class="text-right"><strong>₱21,368.00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="row">
+                    <div class="col-sm-12  col-md-6">
+                        <button class="btn btn-block btn-light" id="contshop" onclick="location.href = 'products.html';">Continue Shopping</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <button class="btn btn-lg btn-block text-uppercase checkout" id="chckout" onclick="location.href = 'checkout.html';">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="l-footer">
+        <h1>
+        <img src="images/logo/LOGO NAME.png" alt="PC Mechanic"></h1>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam atque recusandae in sit sunt molestiae aliquid fugit. Mollitia eaque tempore iure sit nobis? Vitae nemo, optio maiores numquam quis recusandae.</p>
+        </div>
+        <ul class="r-footer">
+        <li>
+        <h2>Message us</h2>
+        <ul class="box">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="mailto:contact@pcmechanic.com">Contact@pcmechanic.com</a></li>
+        </ul>
+        </li>
+
+        <li class="features">
+        <h2>Information</h2>
+        <ul class="box h-box">
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Sales</a></li>
+            <li><a href="#">Certifications</a></li>
+            <li><a href="#">Customer Service</a></li>
+        </ul>
+        </li>
+        <li>
+        <h2>Legal</h2>
+        <ul class="box">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Contract</a></li>
+        </ul>
+        </li>
+        </ul>
+        <div class="b-footer">
+        <p>All rights reserved by ©Chrome Wolves 2021 </p>
+        </div>
+    </footer>
+
+    <script src="javascript.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
