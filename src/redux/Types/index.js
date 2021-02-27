@@ -14,3 +14,12 @@ export const authActions = {
     CHECK_USER_SESSION: 'CHECK_USER_SESSION', // Checks auth state from firebase Db
     AUTHENTICATION_ERROR: 'AUTHENTICATION_ERROR', // Carries Error from authentication
 }
+
+export const cartActions = {
+    ADD_ITEM_START: 'ADD_ITEM_START', // updates firebase cart 
+}
+
+export const showcaseActions = {
+    SELECT_PRODUCT: 'SELECT_PRODUCT',
+    CLEAR_SELECTED_PRODUCT: 'CLEAR_SELECTED_PRODUCT', 
+}

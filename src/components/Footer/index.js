@@ -9,7 +9,7 @@ import './style.scss'
 const useStyle = makeStyles({
     iconLogo: {
         color: "white", 
-        fontSize: "3rem",
+        fontSize: "2rem",
     },
     fbLogo: {
         paddingLeft: "0",
@@ -26,9 +26,9 @@ const CustomTextField = (props) => {
                 error={meta.touched && meta.error}
                 className="email"
                 helperText={meta.touched ? meta.error : ''}
-                inputProps={{ style: { fontSize: "1.6rem", color: 'white',}}}
-                InputLabelProps={{ style: { fontSize: "1.6rem", color: 'white', }}}
-                FormHelperTextProps={{ style: { fontSize: "1.1rem", color: 'white', } }}
+                inputProps={{ style: {  color: 'white',}}}
+                InputLabelProps={{ style: { color: 'white', }}}
+                FormHelperTextProps={{ style: {  color: '#F44336', } }}
                 fullWidth/>
         </Fragment>
     )

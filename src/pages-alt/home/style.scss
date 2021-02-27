@@ -2,6 +2,32 @@
     margin: 0;
     padding: 0; 
   }
+
+ // Newly Added ///////////
+.items {
+  margin: 0 1rem !important;
+  background-size: cover; 
+  padding-bottom: 15rem;
+  margin-bottom: 3rem !important;
+  transition: all 0.15s ease-in-out;
+  // box-shadow: 10px 0 20px 0 rgba(172, 168, 168, 0.43);
+  // h5 {
+  //   font-size: 1.5rem;
+  // }
+  // small {
+  //   font-size: 1rem;
+  // }
+  &:hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0px 0 20px 5px rgba(172, 168, 168, 0.43);
+  }
+} // end of items
+
+.home-products {
+  max-width: 90%;
+}
+
+//////////////////////////
   
   body{
     overflow-x: hidden;
@@ -16,7 +42,12 @@
   
   .navbar-styles {
     background-color: maroon;
-    font-size: 1.5rem !important;
+    font-size: 0.5rem !important;
+  }
+  .nav-container {
+    height: auto;
+    width: 90%;
+    margin: 0 auto;
   }
   
   .navbar li{
@@ -34,12 +65,11 @@
     background-color: white;
     padding-top: 1px;
     margin-bottom: 165px;
-    box-shadow: 10px 0 20px 0 rgba(172, 168, 168, 0.43);
   }
   
   .image {
-    width: 300px;
-    height: 300px
+    width: 100% !important;
+    height: auto !important;
   }
   
   .info {
@@ -57,7 +87,8 @@
     width: 48%;
     margin-right: 2%;
     border: 2px solid rgb(100, 13, 13);
-    cursor: pointer
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
   }
   
   .cart:hover {
@@ -72,7 +103,8 @@
     width: 48%;
     margin-left: 2%;
     border: 2px solid rgb(100, 13, 13);
-    cursor: pointer
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
   }
   
   .order:hover {
@@ -248,7 +280,7 @@
       font-weight: bold;
       line-height: 20px;
       color: #fff;
-      margin-bottom: 24px; }
+      margin-bottom: 24px; }  
       .login-card .login-btn:hover {
         border: 1px solid #000;
         background-color: transparent;
@@ -268,3 +300,34 @@
       font-size: 14px;
       color: #919aa3; }
   
+.cartbtn{
+  // background: #FE980F;
+  width: 120px;
+  color: #FFFFFF;
+  font-size: 15px;
+  margin-left: 0px;
+  margin-bottom: 50px;
+}
+
+/* cart */
+
+.cartimg{
+  width: 50px;
+  height: 50px;
+}
+
+// .checkout{
+//   background:  #FE980F; 
+// }
+
+// .checkout:hover {
+//   color: #fff;
+//   background-color: #f5740b;
+// }
+
+/* checkout form */
+
+.chkout-form{
+  margin: 20px 20px 20px 20px;
+  padding: 30px;
+}

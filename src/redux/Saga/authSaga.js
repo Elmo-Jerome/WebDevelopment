@@ -1,5 +1,5 @@
 import { authActions } from '../Types'
-import { takeLatest, all , call, put } from 'redux-saga/effects'
+import { takeLatest, all, call, put } from 'redux-saga/effects'
 import { auth, handleProfile, getCurrentUser } from '../../firebase/utils'
 import { signInSuccess, displayError } from '../Actions'
 
@@ -36,7 +36,7 @@ export function* createUser ({ payload: {email, password, displayName} }) {
     try {
         console.log('authSaga/createUser')
         const { user } = yield auth.createUserWithEmailAndPassword(email, password)
-        yield getUserDataFromFirebaseDB(user, displayName)
+        yield getUserDataFromFirebaseDB(user, {displayName})
     } catch (err) { console.log(err) }
 }
 export function* onUserSignUp () {

@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import './alt.scss'
 ///// REDUX /////
 import { useSelector, useDispatch } from 'react-redux'
-import { createUser } from '../../redux/Actions'
+import { createUser, checkUserSession } from '../../redux/Actions'
 const mapState = ({ user }) => ({
     currentUser: user.currentUser,
 })
@@ -20,7 +20,7 @@ const useStyle = makeStyles({
         marginBottom: "0.5rem",
     },
     btn: {
-        fontSize: '1.3rem',
+        // fontSize: '1.3rem',
     }
 })
 
@@ -38,9 +38,9 @@ const CustomTextField = ({label, ...props}) => {
                 error={ meta.touched && meta.error}
                 helperText={meta.touched ? meta.error : ""}
                 // Customization
-                inputProps={{ style: { fontSize: "1.6rem", }}}
-                InputLabelProps={{ style: { fontSize: "1.6rem" }}}
-                FormHelperTextProps={{ style: { fontSize: "1.1rem" } }}
+                // inputProps={{ style: { fontSize: "1.6rem", }}}
+                // InputLabelProps={{ style: { fontSize: "1.6rem" }}}
+                // FormHelperTextProps={{ style: { fontSize: "1.1rem" } }}
                 fullWidth
             />
         </Fragment>
@@ -74,7 +74,7 @@ const RegistrationForm = props => {
     const handleChange = async (values) => {
         const { email, password, displayName } = values
         await dispatch(createUser({email, password, displayName}))
-        alert('sign up success')
+        await dispatch(checkUserSession())
     }
     // Redirect user To Homepage after successful Sign in
     useEffect(()=>{
@@ -145,6 +145,11 @@ const RegistrationForm = props => {
                                 type="submit"
                                 color="primary"
                             />
+
+                            <p className="login-link">
+                                Already have an account? 
+                                <span onClick={()=>history.push('login')}> Click Here</span>
+                            </p>
                         </Form>
                     )
                 }

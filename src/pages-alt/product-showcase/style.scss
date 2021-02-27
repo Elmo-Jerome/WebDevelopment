@@ -1,0 +1,38 @@
+.showcase-wrapper {
+    height: auto;
+    max-width: 90%;
+    .showcase {
+        margin: 6rem 0 15rem;
+        padding-top: 2rem;
+    
+        .picture-zone {   
+            height: auto;  
+            width: 50%;
+            img {
+                width: 80%;
+                height: auto;
+                padding: 1rem;
+                border: 0.5px solid rgba(0,0,0,0.2);
+                border-radius: 5px;
+            }   
+        } // end of picture-zone
+    
+    
+        .description-zone {
+            box-sizing: border-box;
+            padding-left: 2rem;
+            h1 {
+                font-size: 2rem;
+                font-weight: bold;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        } // end of desxcription-zone
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+}

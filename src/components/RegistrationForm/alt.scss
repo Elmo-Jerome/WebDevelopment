@@ -10,6 +10,19 @@ $border-color: rgb(151, 151, 151);
 
     h1 {
         text-align: center;
-        font-size: 3rem;
+        font-size: 2rem;
+    }
+    
+    .login-link {
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+        cursor: default;
+        span {
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+                color: gray;
+            }
+        }
     }
 }

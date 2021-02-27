@@ -37,9 +37,9 @@ const CustomTextField = ({label, ...props}) => {
                 helperText={meta.touched ? meta.error: ""}
 
                 // Customizations
-                inputProps={{ style: { fontSize: "1.6rem", }}}
-                InputLabelProps={{ style: { fontSize: "1.6rem" }}}
-                FormHelperTextProps={{ style: { fontSize: "1.1rem" } }}
+                // inputProps={{ style: { fontSize: "1.6rem", }}}
+                // InputLabelProps={{ style: { fontSize: "1.6rem" }}}
+                // FormHelperTextProps={{ style: { fontSize: "1.1rem" } }}
                 fullWidth
             />
         </Fragment>
@@ -56,7 +56,10 @@ const CustomButton = (props) => {
                 type={props.type}
                 onClick={props.onClick}
                 fullWidth
-                style= {{ marginTop: "1rem", fontSize: "1.3rem"}}
+                style= {{ 
+                    marginTop: "1rem", 
+                    // fontSize: "1.3rem"
+                }}
                 color={props.color}
             >
                 {props.name}
@@ -159,6 +162,10 @@ const LoginForm = props => {
                                 type="button"
                                 onClick={handleGoogleSignIn}
                            />
+                           <p className="registration-link">
+                               Don't have an account? 
+                               <span onClick={() => history.push('registration')}> Click Here</span>
+                           </p>
                            
                         </Form>
                     ) 

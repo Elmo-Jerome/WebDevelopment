@@ -5,14 +5,14 @@ import { signInSuccess } from '../Actions'
 
 export function* getUserDataFromFirestoreDB(userAuth, additionalData) {
     try {
-        const userRef = yield call(handleProfile, {userAuth, additionalData})
-        const user = yield userRef.get()
-        yield put(
-            signInSuccess({
-                id: user.id,
-                ...user.data(),
-            })
-        )
+        const userRef = yield call(handleProfile, {userAuth, ...additionalData})
+        // const user = yield userRef.get()
+        // yield put(
+        //     signInSuccess({
+        //         id: user.id,
+        //         ...user.data(),
+        //     })
+        // )
     } catch (err) { console.log(err) }
 }
 
@@ -26,10 +26,10 @@ export function* onEmailSignIn() {
     yield takeLatest(EMAIL_SIGN_IN_START, emailSignIn)
 }
 
-export function* createUser({ payload: {email, password} }) {
+export function* createUser({ payload: {email, password, displayName} }) {
     try {
         const { user } = yield auth.createUserWithEmailAndPassword(email, password)
-        yield getUserDataFromFirestoreDB(user)
+        yield getUserDataFromFirestoreDB(user, {displayName: displayName})
     } catch (err) { console.log(err) }
 }
 export function* onUserSignUp() {

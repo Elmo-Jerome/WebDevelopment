@@ -20,15 +20,23 @@ import Women from './pages/Women'
 
 ///// Pages /////
 import Home from './pages-alt/home'
+import Products from './pages-alt/products'
+import ProductShowcase from './pages-alt/product-showcase'
+import Cart from './pages-alt/cart'
+import Checkout from './pages-alt/checkout'
 
 ////// hoc /////
 import WithAuth from './components/hoc/withAuth'
 
 ///// Redux /////
 import { checkUserSession } from './redux/Actions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+const mapState = ({user}) => ({
+  currentUser: user.currentUser,
+})
 
 const App = props => {
+  const { currentUser } = useSelector(mapState)
   const dispatch = useDispatch()
 
   useEffect(()=>{
@@ -39,7 +47,33 @@ const App = props => {
         <div className="App">
           <Switch>
             <Route exact path="/" render={() => (
+                <MainLayout>
                   <Home />
+                </MainLayout>
+                )}
+              />
+              <Route exact path="/checkout" render={() => (
+                <MainLayout>
+                  <Checkout />
+                </MainLayout>
+                )}
+              />
+              <Route exact path="/products" render={() => (
+                <MainLayout>
+                  <Products />
+                </MainLayout>
+                )}
+              />
+              <Route exact path="/product-showcase" render={() => (
+                <MainLayout>
+                  <ProductShowcase />
+                </MainLayout>
+                )}
+              />
+              <Route exact path="/cart" render={() => (
+                <MainLayout>
+                  <Cart />
+                </MainLayout>
                 )}
               />
               <Route exact path="/registration" 

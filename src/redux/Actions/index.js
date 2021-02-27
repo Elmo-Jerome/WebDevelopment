@@ -4,8 +4,11 @@ import {
     SIGN_UP_USER_START, 
     SET_CURRENT_USER, 
     PASSWORD_RESET_EMAIL_SENT,
-    CHECK_USER_SESSION } from '../Types'
-import { authActions } from '../Types'
+    CHECK_USER_SESSION,
+    showcaseActions,
+} from '../Types'
+import { useHistory } from 'react-router-dom'
+import { authActions, cartActions } from '../Types'
 import { auth } from '../../firebase/utils'
 
 // Saga Actions
@@ -34,7 +37,8 @@ export const displayError = (errorMsg) => ({
 })
 
 // Thunk Actions
-export const logoutUser = () => dispatch => {
+export const logoutUser = () => async dispatch => {
+    await auth.signOut()
     dispatch({
         type: SIGN_IN_SUCCESS,
         payload: false,
@@ -60,6 +64,29 @@ export const passwordResetEmailReset = () => dispatch => {
         })
     } catch(err) { console.log(err) }
 }
+
+
+// SELECT PRODUCT TO SHOWCASE 
+export const selectProduct = (product) => dispatch => {
+    dispatch({
+        type: showcaseActions.SELECT_PRODUCT,
+        payload: product,
+    })
+}
+
+export const clearSelectedProduct = () => dispatch => {
+    dispatch({
+        type: showcaseActions.CLEAR_SELECTED_PRODUCT,
+    })
+}
+
+
+// Cart Actions
+export const addToCart = (product, currentUser) => ({
+    type: cartActions.ADD_ITEM_START,
+    payload: { product, currentUser },
+})
+
 
 // Thunk Actions
 export const setCurrentUser = user => dispatch => {

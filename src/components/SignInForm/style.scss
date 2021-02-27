@@ -30,11 +30,11 @@ $link-color: rgb(0, 47, 255);
     h1 {
         text-align: center;
         color: $text-color;
-        font-size: 3rem; 
+        font-size: 2rem; 
     }
     a {
         padding-top: 0.5rem;
-        font-size: 1.3rem;
+        font-size: 0.7rem;
         color: $link-color;
         cursor: pointer;
     }
@@ -47,4 +47,17 @@ $link-color: rgb(0, 47, 255);
             background-color: darken(#ff1100, 15% ) !important;
         }
     }
-}
+
+    .registration-link {
+        margin-top: 0.5rem;
+        cursor: default;
+        font-size: 0.8rem;
+        span {
+            transition: all 0.2s ease-in-out;
+            font-weight: bold;
+            &:hover {
+                color: gray
+            }
+        }
+    } // end of regstration-link
+} // end of login
